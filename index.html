@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShelfIt 📚</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+
+  <header>
+    <h1>ShelfIt 📚</h1>
+    <p>Track the books you read, plan to read, or are currently reading!</p>
+  </header>
+
+  <main>
+    <section id="add-book-section">
+      <h2>Add a Book</h2>
+      <form id="book-form">
+        <input type="text" id="title" placeholder="Book Title" required />
+        <input type="text" id="author" placeholder="Author" required />
+        <select id="status">
+          <option value="to-read">To Read</option>
+          <option value="reading">Reading</option>
+          <option value="finished">Finished</option>
+        </select>
+        <textarea id="notes" placeholder="Optional notes..."></textarea>
+        <button type="submit">Add Book</button>
+      </form>
+      <div id="error-message" style="color: #f44336; margin-top: 0.5rem; display: none;"></div>
+    </section>
+
+    <section id="book-list-section">
+      <h2>Your Shelf</h2>
+      
+      <div class="search-sort-container">
+        <input type="text" id="search" placeholder="Search by title or author..." />
+        <select id="sort">
+          <option value="default">Sort By</option>
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+          <option value="status">Status</option>
+        </select>
+      </div>
+      
+      <div id="book-list">
+        <!-- Book cards will go here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ for readers by Hari</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

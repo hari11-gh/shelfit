@@ -1,0 +1,222 @@
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+
+  /* Gradient base */
+  background: linear-gradient(135deg, #1a1a3d, #3c1361, #5d3a91);
+  background-size: 400% 400%;
+  animation: nightGradientShift 30s ease infinite;
+
+  position: relative;
+  min-height: 100vh;
+
+  /* Ensure scrolling works */
+  overflow-y: auto;
+}
+
+
+/* Static star background using multiple dots */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px;
+  background-position: 0 0, 50px 50px;
+  opacity: 0.6;
+}
+
+/* Main content should appear above the stars */
+main, header, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #d1c4e9;
+}
+
+header p {
+  font-size: 1rem;
+  color: #c5cae9;
+}
+
+/* Add Book Section */
+#add-book-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#book-form input,
+#book-form select,
+#book-form textarea,
+#book-form button {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
+}
+
+#book-form input:focus,
+#book-form select:focus,
+#book-form textarea:focus {
+  outline: none;
+  background: white;
+  border-color: #7b1fa2;
+}
+
+#book-form button {
+  background-color: #7b1fa2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#book-form button:hover {
+  background-color: #9c27b0;
+}
+
+/* Book List Section */
+#book-list-section input#search {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  flex-grow: 1;
+}
+
+#book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Book Card */
+.book-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-left: 5px solid #7b1fa2;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  color: white;
+}
+
+.book-card h3 {
+  margin-bottom: 0.3rem;
+}
+
+.book-card p {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.book-edit input,
+.book-edit textarea,
+.book-edit select,
+.book-edit button {
+  margin: 0.3rem 0;
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.book-edit button {
+  background: #7b1fa2;
+  color: white;
+  font-weight: 600;
+  border: none;
+  margin-top: 0.5rem;
+}
+.book-edit button:hover {
+  background: #9c27b0;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* Add this near your existing body styles */
+body {
+  /* ... keep all your existing styles as is ... */
+
+  overflow-y: auto; /* enable vertical scrolling */
+}
+
+/* New container for search and sort side by side */
+.search-sort-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+/* Sort dropdown styling */
+#book-list-section select#sort {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 150px;
+  margin: 0; /* Remove previous margin-bottom */
+}
+
+/* Responsive adjustments */
+@media (max-width: 479px) {
+  .search-sort-container {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  #book-list-section select#sort,
+  #book-list-section input#search {
+    width: 100%;
+  }
+}
