@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#7b1fa2" />
   <title>ShelfIt 📚</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
@@ -67,7 +68,36 @@
         });
     });
   }
+
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.log('Install prompt saved');
+
+    const installBtn = document.createElement('button');
+    installBtn.textContent = 'Install ShelfIt';
+    installBtn.style.position = 'fixed';
+    installBtn.style.bottom = '20px';
+    installBtn.style.right = '20px';
+    installBtn.style.padding = '10px';
+    installBtn.style.backgroundColor = '#6200ee';
+    installBtn.style.color = 'white';
+    installBtn.style.border = 'none';
+    installBtn.style.borderRadius = '5px';
+    installBtn.style.cursor = 'pointer';
+
+    installBtn.addEventListener('click', async () => {
+      installBtn.remove();
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response: ${outcome}`);
+      deferredPrompt = null;
+    });
+
+    document.body.appendChild(installBtn);
+  });
 </script>
 
 </html>
-
