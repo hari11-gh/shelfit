@@ -1,7 +1,7 @@
 const bookListEl = document.getElementById('book-list');
 const searchInput = document.getElementById('search');
 const sortSelect = document.getElementById('sort');
-const errorMessage = document.getElementById('error-message'); // Make sure you have this div in your HTML
+const errorMessage = document.getElementById('error-message');
 
 let books = [];
 
@@ -37,8 +37,14 @@ function renderBooks() {
 
   bookListEl.innerHTML = '';
 
-  filteredBooks.forEach((book, index) => {
-    const card = createBookCard(book, index);
+  filteredBooks.forEach(book => {
+    const realIndex = books.findIndex(b =>
+      b.title === book.title &&
+      b.author === book.author &&
+      b.status === book.status &&
+      b.notes === book.notes
+    );
+    const card = createBookCard(book, realIndex);
     bookListEl.appendChild(card);
   });
 }
@@ -153,4 +159,3 @@ sortSelect.addEventListener('change', renderBooks);
 
 // Initial load
 loadBooks();
-

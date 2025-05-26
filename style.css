@@ -8,8 +8,9 @@
 
 body {
   margin: 0;
+  font-size:1rem;
   padding: 1rem;
-  max-width: 800px;
+  max-width:100%;
   margin-left: auto;
   margin-right: auto;
   font-family: 'Segoe UI', sans-serif;
@@ -137,7 +138,9 @@ header p {
 .book-card {
   background: rgba(255, 255, 255, 0.15);
   border-left: 5px solid #7b1fa2;
+  font-size:1rem;
   padding: 1rem;
+  margin-bottom: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
@@ -220,3 +223,5 @@ body {
     width: 100%;
   }
 }
+
+
