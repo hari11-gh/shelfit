@@ -7,6 +7,7 @@
   <title>ShelfIt 📚</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
 </head>
 <body>
 
@@ -54,50 +55,55 @@
   <footer>
     <p>Made with ❤️ for readers by Hari</p>
   </footer>
+
+  <!-- Install prompt and service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch(error => {
+            console.log('Service Worker registration failed:', error);
+          });
+      });
+    }
+
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log('Install prompt saved');
+
+      const installBtn = document.createElement('button');
+      installBtn.textContent = 'Install ShelfIt';
+      installBtn.style.position = 'fixed';
+      installBtn.style.bottom = '20px';
+      installBtn.style.right = '20px';
+      installBtn.style.padding = '10px';
+      installBtn.style.backgroundColor = '#6200ee';
+      installBtn.style.color = 'white';
+      installBtn.style.border = 'none';
+      installBtn.style.borderRadius = '5px';
+      installBtn.style.cursor = 'pointer';
+
+      installBtn.addEventListener('click', async () => {
+        installBtn.remove();
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response: ${outcome}`);
+        deferredPrompt = null;
+      });
+
+      document.body.appendChild(installBtn);
+    });
+  </script>
+
+  <!-- 🔥 Main App Logic (book handling, renderBooks, etc.) -->
+  <script src="script.js"></script>
+
 </body>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          console.log('Service Worker registered with scope:', registration.scope);
-        })
-        .catch(error => {
-          console.log('Service Worker registration failed:', error);
-        });
-    });
-  }
-
-  let deferredPrompt;
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    console.log('Install prompt saved');
-
-    const installBtn = document.createElement('button');
-    installBtn.textContent = 'Install ShelfIt';
-    installBtn.style.position = 'fixed';
-    installBtn.style.bottom = '20px';
-    installBtn.style.right = '20px';
-    installBtn.style.padding = '10px';
-    installBtn.style.backgroundColor = '#6200ee';
-    installBtn.style.color = 'white';
-    installBtn.style.border = 'none';
-    installBtn.style.borderRadius = '5px';
-    installBtn.style.cursor = 'pointer';
-
-    installBtn.addEventListener('click', async () => {
-      installBtn.remove();
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User response: ${outcome}`);
-      deferredPrompt = null;
-    });
-
-    document.body.appendChild(installBtn);
-  });
-</script>
-
 </html>
+
